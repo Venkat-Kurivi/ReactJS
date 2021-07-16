@@ -750,11 +750,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ReactJS_Projects\\SampleWebAPI\\SampleWebAPI.csproj",
+      "projectUniqueName": "D:\\ReactJS_Projects\\ReactJs\\SampleWebAPI\\SampleWebAPI.csproj",
       "projectName": "SampleWebAPI",
-      "projectPath": "D:\\ReactJS_Projects\\SampleWebAPI\\SampleWebAPI.csproj",
+      "projectPath": "D:\\ReactJS_Projects\\ReactJs\\SampleWebAPI\\SampleWebAPI.csproj",
       "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-      "outputPath": "D:\\ReactJS_Projects\\SampleWebAPI\\obj\\",
+      "outputPath": "D:\\ReactJS_Projects\\ReactJs\\SampleWebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
