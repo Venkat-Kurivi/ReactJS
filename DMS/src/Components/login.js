@@ -1,8 +1,7 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap';
-import reactDom from 'react-dom';
 import { connect } from "react-redux";
-import{ url} from './Constants/constants';
+import { loginService } from '../Services/loginService';
 
 class LoginComponent extends React.Component {
     constructor(props) {
@@ -13,27 +12,20 @@ class LoginComponent extends React.Component {
         };
     }
     submit() {
-
-        let BodyData = this.state;
-
-        fetch("https://localhost:44332/Home/Login", {
-            method: 'POST',
-
-            headers: { "Content-type": "application/json; charset=UTF-8" },
-
-            body: JSON.stringify(BodyData)
-
-        }).then((result) => {
-            result.json().then((res) => {
-
-                console.log('res', res)
-                console.log("Email details: ",document.getElementById("email").value);
-                this.props.INSERT();
-                this.props.history.push("/dashboard");
-
-            })
-
-        })
+        let bodyData = this.state;
+        try {
+            loginService.Login(bodyData).then((result) => {
+                result.json().then((res) => {
+                    console.log('res', res)
+                    console.log("Email details: ", document.getElementById("email").value);
+                    this.props.INSERT();
+                    this.props.history.push("/dashboard");
+                })
+            });
+        }
+        catch (ex) {
+            console.log("Exception : ", ex);
+        }
     }
 
     onTextChanged = (event) => {
@@ -91,15 +83,15 @@ const mapDispatchToProps = dispatch => {
     return {
         INSERT: () => dispatch({
             type: "INSERT",
-            email:  document.getElementById("email").value,
+            email: document.getElementById("email").value,
         })
     }
 };
 
 const mapStateToProps = state => {
-    return {      
-      Email : state.email      
+    return {
+        Email: state.email
     };
-  };
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(LoginComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);

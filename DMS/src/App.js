@@ -5,11 +5,13 @@ import LoginLayoutRoute from './Layouts/loginLayout';
 import { BrowserRouter as Router, Route, Redirect, Switch  } from 'react-router-dom';  
 import MainLayoutRoute from './Layouts/mainLayout';
 import DashboardComponent from './Components/dashboard';
+import ClaimDetailsComponent from './Components/claimDetails';
 
 //Redex related
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import myReducer from './RedEx/reducer'
+
  
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
           </Route>   
               <LoginLayoutRoute path="/Login" component={LoginComponent} />    
               <MainLayoutRoute path="/dashboard" component={DashboardComponent} />    
+              <MainLayoutRoute path="/claimDetails/:id"  component={ClaimDetailsComponent} />    
           </Switch>   
           </Router> 
           </Provider>

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SampleWebAPI.Models;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace SampleWebAPI.Controllers
@@ -31,5 +33,42 @@ namespace SampleWebAPI.Controllers
             
             return StatusCode(500, data);
         }
+
+        [HttpGet("GetClaimList/{email}")]
+        public async Task<IActionResult> GetClaimList(string email)
+        {
+            string filePath = GetFilePath("ClaimDetails.json");
+            string json = await GetjsonFromFile(filePath);
+            return Ok(json);
+        }
+
+        [HttpGet("GetClaimDetails/{id}")]
+        public async Task<IActionResult> GetClaimDetails(string id)
+        {
+            string filePath = GetFilePath("ClaimDetails.json");
+            string json = await GetjsonFromFile(filePath);
+            JArray claimsArray = (JArray)JsonConvert.DeserializeObject(json);
+            return Ok(claimsArray[0].ToString());
+        }
+
+        private string GetFilePath(string fileName)
+        {
+            return Path.Combine(@"D:\Projects\ReactJs\SampleWebAPI\Data", fileName);
+        }
+
+        private async Task<string> GetjsonFromFile(string filePath)
+        {
+            if (System.IO.File.Exists(filePath))
+            {
+                using (StreamReader r = new StreamReader(filePath))
+                {
+                    string json = await r.ReadToEndAsync();
+                    return json;
+                }
+            }
+
+            return "";
+        }
+
     }
 }
